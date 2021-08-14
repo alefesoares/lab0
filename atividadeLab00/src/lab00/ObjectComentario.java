@@ -36,7 +36,7 @@ public class ObjectComentario {
 	}
 	
 	public String toString() {
-		return this.autor + "\n" + this.texto;
+		return"Autor: " + this.autor + "\n" + " Disciplina: " + this.disciplina + "\n" + "Comentario: " + this.texto;
 	}
 	
 }

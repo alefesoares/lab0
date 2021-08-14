@@ -10,7 +10,7 @@ public class ObjectAluno {
 	
 	private ArrayList<ObjectComentario> lista_comentarios = new ArrayList<ObjectComentario>();
 	
-	public ObjectAluno(String nome, String email, String senha, ObjectDisciplina curso) {
+	public ObjectAluno(String nome, String email, String senha) {
 		
 		this.nome = nome;
 		this.email = email;
@@ -53,5 +53,7 @@ public class ObjectAluno {
 	lista_comentarios.add(_comentario);
 	
 }
-	
+	public String toString() {
+		return "Nome: " + this.nome + ", Email: " + this.email ;
+	}
 }
