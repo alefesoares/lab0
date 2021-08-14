@@ -5,11 +5,12 @@ import javax.swing.JOptionPane;
 public class mainclass {
 
 	static Metodos metodos = new Metodos();
-
+	
+	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		
 		ObjectAluno alunoLogado;
-		
+		ObjectComentario comentario = null;
 		
 		
 		Object[] opcoes = { "FAZER LOGIN", "SE CADASTRAR"};
@@ -60,7 +61,14 @@ public class mainclass {
 				}				
 				else if (opcao == 4) {
 				}
-					
+				else if (opcao == 5) {
+				ObjectDisciplina disciplina = metodos.escolherDisciplina();
+				String texto =  JOptionPane.showInputDialog("Digite seu comentario");
+					comentario.setAutor(alunoLogado);
+					comentario.setDisciplina(disciplina);
+					comentario.setTexto(texto);
+					alunoLogado.addObjectComentario(comentario);
+				}
 				else {
 					break;
 				}

@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class Metodos {
 	
 	BancoDados BD = new BancoDados();
-
+	
 	public ObjectDisciplina discMaisCurtida() {
 		int maisLikes = 0;
 		ObjectDisciplina disciplina = new ObjectDisciplina();
@@ -86,9 +86,10 @@ public class Metodos {
 					+ "2. AVALIAR DISCIPLINA\n"
 					+ "3. VER TODAS DISCIPLINAS\n"
 					+ "4. MINHAS AVALIAÇÕES\n"
-					+ "5. SAIR");
+					+ "5. ADICIONAR COMENTARIO\n"
+					+ "6. SAIR");
 			
-			if (!op.equals("1") && !op.equals("2") && !op.equals("3") && !op.equals("4") && !op.equals("5")) {
+			if (!op.equals("1") && !op.equals("2") && !op.equals("3") && !op.equals("4") && !op.equals("5") && !op.equals("6")) {
 				JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA!");
 			}else {
 				return Integer.parseInt(op);
