@@ -7,18 +7,22 @@ public class Metodos {
 	
 	BancoDados BD = new BancoDados();
 	
-	public ObjectDisciplina discMaisCurtida() {
-		int maisLikes = 0;
-		ObjectDisciplina disciplina = new ObjectDisciplina();
-		for (ObjectDisciplina d : BD.getLista_disciplinas()) {
-			if (d.getLikes() > maisLikes) {
-				maisLikes = d.getLikes();
-				disciplina = d;		
-			}
+	public void listaComentariosAluno(ObjectAluno _aluno) {
+	ArrayList<ObjectComentario> listaComentarios = BD.getLista_comentarios();
+	ObjectComentario comentario = new ObjectComentario(null, null, null);
+	if (listaComentarios.size() == 0) {JOptionPane.showMessageDialog(null,"Não a comentarios cadastrados!");}
+	else {
+	for (int k = 0; k < listaComentarios.size(); k++) {
+		comentario=listaComentarios.get(k);
+		if (_aluno == comentario.getAutor()) {
+			JOptionPane.showMessageDialog(null, comentario.getTexto());
 		}
-		return disciplina;
 	}
-
+	}	
+	}
+	public void addObjectComentario(ObjectComentario _comentario) {
+		BD.addObjectComentario(_comentario);
+		}
 	public ObjectDisciplina escolherDisciplina() {
 		ArrayList<ObjectDisciplina> listaDisciplinas = BD.getLista_disciplinas();
 		Object[] disciplinas = new Object[listaDisciplinas.size()];
@@ -33,7 +37,7 @@ public class Metodos {
 		}return false;
 		}
 		
-	public boolean disciplinas_vazias() {
+	public boolean disciplinasVazias() {
 		if (BD.getLista_disciplinas().size() == 0) {
 			return true;
 		}return false;
@@ -46,15 +50,12 @@ public class Metodos {
 			}
 		}return false;
 	}
-	
 	public void addAluno(ObjectAluno _a) {
 		BD.getLista_alunos().add(_a);
 	}
-	
 	public void addDisciplina(ObjectDisciplina _d) {
 		BD.getLista_disciplinas().add(_d);
 	}
-	
 	public ObjectAluno logar(String email, String senha){
 		for (ObjectAluno a : BD.getLista_alunos()) {
 			if (a.getEmail().equals(email) && a.getSenha().equals(senha)) {
@@ -62,14 +63,12 @@ public class Metodos {
 			}
 		}return null;
 	}
-	
 	public boolean verificaIdDisciplina(int id) {
 		for (ObjectDisciplina d : BD.getLista_disciplinas()) {
 			if (d.getId() == id) {
 				return true;
 			}
 		}return false;
-		
 	}
 	public ObjectDisciplina listaDisciplinas() {
 		ArrayList<ObjectDisciplina> listaDisciplinas = BD.getLista_disciplinas();
@@ -79,25 +78,6 @@ public class Metodos {
 			JOptionPane.showMessageDialog(null, listaDisciplinas);
 			}return null;
 	}
-	public int menuPrincipal() {
-		while (true){
-			String op = JOptionPane.showInputDialog("MENU\n\n"
-					+ "1. ADICIONAR DISCIPLINA\n"
-					+ "2. AVALIAR DISCIPLINA\n"
-					+ "3. VER TODAS DISCIPLINAS\n"
-					+ "4. MINHAS AVALIAÇÕES\n"
-					+ "5. ADICIONAR COMENTARIO\n"
-					+ "6. SAIR");
-			
-			if (!op.equals("1") && !op.equals("2") && !op.equals("3") && !op.equals("4") && !op.equals("5") && !op.equals("6")) {
-				JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA!");
-			}else {
-				return Integer.parseInt(op);
-			}
-			
-			
-		}
-	}
-
 	
+
 }

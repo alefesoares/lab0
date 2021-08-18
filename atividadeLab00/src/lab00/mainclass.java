@@ -5,18 +5,15 @@ import javax.swing.JOptionPane;
 public class mainclass {
 
 	static Metodos metodos = new Metodos();
+	static Telas tela = new Telas();
 	
-	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		
 		ObjectAluno alunoLogado;
-		ObjectComentario comentario = null;
 		
-		
-		Object[] opcoes = { "FAZER LOGIN", "SE CADASTRAR"};
+		Object[] opcoes = { "LOGIN", "CADASTRAR"};
 		int operacao = JOptionPane.showOptionDialog(null, "Bem-vindo!", "Sistema de Avaliação de Disciplinas",
 				JOptionPane.DEFAULT_OPTION, 1, null, opcoes, opcoes[0]);
-		
 		if (operacao == 0) {
 			String email = JOptionPane.showInputDialog("Digite seu email");
 			String senha = JOptionPane.showInputDialog("Digite sua senha");
@@ -25,49 +22,27 @@ public class mainclass {
 				JOptionPane.showMessageDialog(null, "Falha no login!");
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "Bem vindo,  " + alunoLogado.getNome().split(" ")[0] + "!");
+				
 		while (true){
-				int opcao = metodos.menuPrincipal();
-				
-				if (opcao == 1) { //adicionar disciplina
-					String nome = JOptionPane.showInputDialog("Nome da disciplina");
-					int id = Integer.parseInt(JOptionPane.showInputDialog("ID da disciplina"));
-					if (metodos.disciplinas_vazias()) {
-						ObjectDisciplina disciplina = new ObjectDisciplina(nome,id, 0);
-						metodos.addDisciplina(disciplina);
-						JOptionPane.showMessageDialog(null, "Disciplina cadastrada com sucesso");
-						continue;
-					}else {
-						if (metodos.verificaIdDisciplina(id)) {
-							JOptionPane.showMessageDialog(null, "Já existe uma disciplina com esse ID");
-						}else {
-							ObjectDisciplina disciplina = new ObjectDisciplina(nome,id,0);
-							metodos.addDisciplina(disciplina);
-							JOptionPane.showMessageDialog(null, "Disciplina cadastrada com sucesso");
-							continue;
-						}
-					}
+				int opcao = tela.menuPrincipalAdimin();
+				if (opcao == 1) {tela.telasMenuAdimn1();}
+				else if (opcao == 2) {metodos.listaComentariosAluno(alunoLogado);
 				}
-				else if (opcao == 2) {metodos.escolherDisciplina();
-				
-				}
-				//
 				else if (opcao == 3) {
-					if (metodos.disciplinas_vazias() == true) {
+					if (metodos.disciplinasVazias() == true) {
 						JOptionPane.showMessageDialog(null, "Não há disciplinas cadastradas no sistema.");
 						continue;
 					}else {metodos.listaDisciplinas();
 					}
 				}				
 				else if (opcao == 4) {
-				}
-				else if (opcao == 5) {
 				ObjectDisciplina disciplina = metodos.escolherDisciplina();
 				String texto =  JOptionPane.showInputDialog("Digite seu comentario");
-					comentario.setAutor(alunoLogado);
-					comentario.setDisciplina(disciplina);
-					comentario.setTexto(texto);
-					alunoLogado.addObjectComentario(comentario);
+					ObjectComentario comentario = new ObjectComentario(alunoLogado, texto, disciplina);
+					metodos.addObjectComentario(comentario);
+					JOptionPane.showMessageDialog(null,"Comentario cadastrado com sucesso!");
+				}
+				else if (opcao == 5) {
 				}
 				else {
 					break;
@@ -88,10 +63,6 @@ public class mainclass {
 		}else {
 		}
 		}
-		
-		
-		
-		
 	}
 
 
